@@ -3,7 +3,7 @@ import { LoginPage } from '../../pageOjects/login.po.js';
 import { ContactPage } from '../../pageOjects/contact.po.js';
 const testData = require('../../fixtures/loginFixture.json');
 const contactTestData = require('../../fixtures/contactFixture.json');
-const {authenticateUser,createEntity, deleteEntity, getEntity } = require('../../utils/helper.spec.js');
+const { authenticateUser, createEntity, deleteEntity, getEntity, validateEntity } = require('../../utils/helper.spec.js');
 let accessToken;
 
 test.beforeEach(async ({ page }) => {
@@ -19,6 +19,10 @@ test.describe('Contact testcases', () => {
         await contact.contactAdd(contactTestData.contact.firstName, contactTestData.contact.lastName, contactTestData.contact.dateOfBirth, contactTestData.contact.email, contactTestData.contact.phone, contactTestData.contact.address, contactTestData.contact.city, contactTestData.contact.state, contactTestData.contact.postal, contactTestData.contact.country);
         await contact.viewContact();
         await contact.validateContactCreated(contactTestData.contact.firstName, contactTestData.contact.lastName, contactTestData.contact.dateOfBirth, contactTestData.contact.email, contactTestData.contact.phone, contactTestData.contact.address, contactTestData.contact.city, contactTestData.contact.state, contactTestData.contact.postal, contactTestData.contact.country);
+        accessToken = await authenticateUser(testData.validUser.userName, testData.validUser.password, { request });
+        const id = await getEntity(accessToken, '/contacts', '200', { request });
+        await deleteEntity(accessToken, `/contacts/${id}`, { request });
+        await validateEntity(accessToken, `/contacts/${id}`, '404', { request });
     })
 
     test('Contact Edit test', async ({ page, request }) => {
@@ -41,6 +45,9 @@ test.describe('Contact testcases', () => {
         await contact.viewContact();
         await contact.contactEdit(contactTestData.contactEdit.firstName);
         await contact.validateContactCreated(contactTestData.contactEdit.firstName, contactTestData.contact.lastName, contactTestData.contact.dateOfBirth, contactTestData.contact.email, contactTestData.contact.phone, contactTestData.contact.address, contactTestData.contact.city, contactTestData.contact.state, contactTestData.contact.postal, contactTestData.contact.country);
+        const id = await getEntity(accessToken, '/contacts', '200', { request });
+        await deleteEntity(accessToken, `/contacts/${id}`, { request });
+        await validateEntity(accessToken, `/contacts/${id}`, '404', { request });
     })
 })
 
