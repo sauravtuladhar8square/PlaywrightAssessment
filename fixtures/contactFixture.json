@@ -1,0 +1,17 @@
+{
+    "contact": {
+      "firstName": "Saurav",
+      "lastName": "Tuladhar",
+      "dateOfBirth": "1995-06-30",
+      "email": "sauravtuladhar143@gmail.com",
+      "phone": "9849777665",
+      "address": "Nhyokha",
+      "city": "Kathmandu",
+      "state": "Bagmati",
+      "postal": "44600",
+      "country": "Nepal"
+    },
+    "contactEdit": {
+      "firstName": "Hello"
+    }
+  }

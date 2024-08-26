@@ -1,0 +1,9 @@
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/fixtures/.DS_Store
+/reports
+/tests/.DS_Store
+.DS_Store
