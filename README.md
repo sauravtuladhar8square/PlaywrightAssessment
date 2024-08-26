@@ -1,4 +1,4 @@
-# MMP2.0 Back office Automation
+# Playwright assessment
 
 For using this repo, use the following command.
 
@@ -19,7 +19,7 @@ To run the automation script use following command:</br></br>
 
 <ul>
     <li>
-        <code> <b>npx playwright test tests/brand/brand.spec.js --project chromium --headed</b></code> </br>
+        <code> <b>npx playwright test tests/contact/contact.spec.js --project chromium --headed</b></code> </br>
             This command will run the brand test in headed mode for chromium browser.</br></br>
     </li>
 </ul>
