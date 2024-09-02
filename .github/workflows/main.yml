@@ -1,4 +1,4 @@
-name: MMP2.0-BO Tests
+name: Playwright Assessment
 on:
   push:
     branches: [ main ]

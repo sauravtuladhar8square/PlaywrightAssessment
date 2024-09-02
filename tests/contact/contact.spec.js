@@ -9,17 +9,18 @@ let accessToken;
 test.beforeEach(async ({ page }) => {
     const login = new LoginPage(page);
     await page.goto('/');
-    await login.login(testData.validUser.userName, testData.validUser.password);
-    await login.verifyValidLogin();
+    const validUser = testData.users.find(user => user.isValid);
+    await login.login(validUser.userName, validUser.password);
 })
 
 test.describe('Contact testcases', () => {
     test('Contact Add test', async ({ page, context, request }) => {
         const contact = new ContactPage(page);
+        const validUser = testData.users.find(user => user.isValid);
         await contact.contactAdd(contactTestData.contact.firstName, contactTestData.contact.lastName, contactTestData.contact.dateOfBirth, contactTestData.contact.email, contactTestData.contact.phone, contactTestData.contact.address, contactTestData.contact.city, contactTestData.contact.state, contactTestData.contact.postal, contactTestData.contact.country);
         await contact.viewContact();
         await contact.validateContactCreated(contactTestData.contact.firstName, contactTestData.contact.lastName, contactTestData.contact.dateOfBirth, contactTestData.contact.email, contactTestData.contact.phone, contactTestData.contact.address, contactTestData.contact.city, contactTestData.contact.state, contactTestData.contact.postal, contactTestData.contact.country);
-        accessToken = await authenticateUser(testData.validUser.userName, testData.validUser.password, { request });
+        accessToken = await authenticateUser(validUser.userName, validUser.password, { request });
         const id = await getEntity(accessToken, '/contacts', '200', { request });
         await deleteEntity(accessToken, `/contacts/${id}`, { request });
         await validateEntity(accessToken, `/contacts/${id}`, '404', { request });
@@ -39,7 +40,8 @@ test.describe('Contact testcases', () => {
             "country": "Nepal"
         };
         const contact = new ContactPage(page);
-        accessToken = await authenticateUser(testData.validUser.userName, testData.validUser.password, { request });
+        const validUser = testData.users.find(user => user.isValid);
+        accessToken = await authenticateUser(validUser.userName, validUser.password, { request });
         await createEntity(Data, accessToken, '/contacts', { request });
         page.reload();
         await contact.viewContact();

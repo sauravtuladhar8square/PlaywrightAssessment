@@ -1,0 +1,10 @@
+[
+    {
+        "module": "Add a New Contact",
+        "url": "/addContact"
+    },
+    {
+        "module": "Logout",
+        "url": "https://thinking-tester-contact-list.herokuapp.com/"
+    }
+]

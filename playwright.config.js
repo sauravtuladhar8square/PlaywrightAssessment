@@ -27,7 +27,7 @@ module.exports = defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://thinking-tester-contact-list.herokuapp.com', //https://d5yqm4msx6uld.cloudfront.net/login //https://mmpbodev.vanillatech.asia/login //process.env.BASE_URL
     screenshot: "only-on-failure",
-    video: "retain-on-failure",
+    video: "on",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',

@@ -1,10 +1,10 @@
 {
-  "validUser": {
-    "userName": "test.user1@test.com",
-    "password": "Test@1234"
-  },
-  "invalidUser": {
-    "userName": "test@test.com",
-    "password": "testPassword"
-  }
+  "users": [
+    { "userName": "test.user1@test.com", "password": "Test@1234", "isValid": true },
+    { "userName": "test@test.com", "password": "Test@1234", "isValid": false },
+    { "userName": "test.user1@test.com", "password": "testPassword", "isValid": false },
+    { "userName": "", "password": "Test@1234", "isValid": false },
+    { "userName": "test.user1@test.com", "password": "", "isValid": false },
+    { "userName": "", "password": "", "isValid": false }
+  ]
 }

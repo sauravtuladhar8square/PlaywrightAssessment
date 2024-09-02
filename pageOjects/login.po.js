@@ -1,5 +1,4 @@
 const { expect } = require("@playwright/test");
-
 exports.LoginPage = class LoginPage {
     constructor(page) {
         this.page = page;
@@ -9,6 +8,7 @@ exports.LoginPage = class LoginPage {
         this.logOut = '//button[@id="logout"]';
         this.loginValidation = '//p[contains(text(),"Click on any contact to view the Contact Details")]';
         this.alertMessage = '//span[@id="error"]';
+        this.signUp = '//button[@id="signup"]';
     }
 
     async login(username, password) {
@@ -18,13 +18,18 @@ exports.LoginPage = class LoginPage {
     }
 
     async verifyValidLogin() {
-        const LoginValidation = await this.page.locator(this.loginValidation);
-        expect(this.logOut).toBeVisible;
-        await expect(LoginValidation).toHaveText('Click on any contact to view the Contact Details');
+        const loginValidation = await this.page.locator(this.loginValidation);
+        await expect(this.page.locator(this.logOut)).toBeVisible();
+        await expect(loginValidation).toHaveText('Click on any contact to view the Contact Details');
     }
 
     async verifyInvalidLogin() {
-        const InvalidLogin = await this.page.locator(this.alertMessage);
-        await expect(InvalidLogin).toHaveText('Incorrect username or password');
+        const invalidLogin = await this.page.locator(this.alertMessage);
+        await expect(invalidLogin).toHaveText('Incorrect username or password');
+    }
+
+    async verifyLogOut() {
+        await this.page.locator(this.logOut).click();
+        expect(this.signUp).toBeVisible;
     }
 }

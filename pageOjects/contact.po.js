@@ -1,6 +1,4 @@
 const { expect } = require("@playwright/test");
-
-
 exports.ContactPage = class ContactPage {
     constructor(page) {
         this.page = page;
@@ -28,8 +26,7 @@ exports.ContactPage = class ContactPage {
         this.savedCountry = '//span[@id="country"]';
         this.viewCreatedContact = '//th[contains(text(),"Name")]//following::td[2]';
         this.editContact = '//button[@id="edit-contact"]';
-
-
+        this.contactTable = '//table[@id="myTable"]';
     }
 
     async contactAdd(firstName, lastName, dateOfBirth, email, phone, address, city, state, postal, country) {
@@ -73,6 +70,7 @@ exports.ContactPage = class ContactPage {
     }
 
     async viewContact() {
+        expect(this.contactTable).toBeVisible;
         await this.page.locator(this.viewCreatedContact).click();
     }
 
